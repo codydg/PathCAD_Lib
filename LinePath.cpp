@@ -1,0 +1,31 @@
+#include "LinePath.h"
+
+#include <stdexcept>
+
+template<class... Ts> struct overload : Ts... { using Ts::operator()...; };
+template<class... Ts> overload(Ts...) -> overload<Ts...>;
+
+LinePath::LinePath(PathElement start, PathElement end, double totalTime) : Path(totalTime),
+        start(start), end(end) {}
+
+Path::PathElement LinePath::getStateAtPercentage(double percentage)
+{
+    if (start.size() != end.size())
+        throw std::length_error("Start and End of LinePath must be of equal length!");
+
+    PathElement result;
+    for (size_t i = 0; i < start.size(); i++)
+    {
+        result.push_back(std::visit(overload{
+            [percentage](std::string a, std::string b) { return percentage < 0.5 ? a : b; },
+            [percentage](double a, double b) { return (b - a) * percentage + a; },
+            [percentage](long a, long b) { static_cast<long>((b - a) * percentage + a); },
+            [percentage](bool a, bool b) { return percentage < 0.5 ? a : b; },
+            [percentage](auto a, auto b) {
+                throw std::logic_error("Start and End DataElement are of incompatible types.");
+            }
+        }, start.at(i), end.at(i)));
+    }
+
+    return result;
+}
