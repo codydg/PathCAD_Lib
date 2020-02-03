@@ -5,10 +5,10 @@
 template<class... Ts> struct overload : Ts... { using Ts::operator()...; };
 template<class... Ts> overload(Ts...) -> overload<Ts...>;
 
-LinePath::LinePath(PathElement start, PathElement end, double totalTime) : Path(totalTime),
+LinePath::LinePath(PathElement start, PathElement end, double totalTime) : ScaledPath(totalTime),
         start(start), end(end) {}
 
-Path::PathElement LinePath::getStateAtPercentage(double percentage)
+GenericPath::PathElement LinePath::getStateAtPercentage(double percentage) const
 {
     if (start.size() != end.size())
         throw std::length_error("Start and End of LinePath must be of equal length!");

@@ -4,19 +4,16 @@
 #include <variant>
 #include <string>
 
-class Path
+class GenericPath
 {
 public:
+    GenericPath() {}
+    virtual ~GenericPath() {}
+
     using DataElement = std::variant<bool, long, double, std::string>;
     using PathElement = std::vector<DataElement>;
 
-    PathElement getStateAtTime(double time) const;
+    virtual PathElement getStateAtTime(double time) const = 0;
     virtual PathElement getStateAtPercentage(double percentage) const = 0;
-    double getTotalTime() const;
-
-protected:
-    Path(double totalTime);
-
-private:
-    double totalTime;
+    virtual double getTotalTime() const = 0;
 };
