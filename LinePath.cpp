@@ -17,13 +17,11 @@ Path::PathElement LinePath::getStateAtPercentage(double percentage)
     for (size_t i = 0; i < start.size(); i++)
     {
         result.push_back(std::visit(overload{
-            [percentage](std::string a, std::string b) { return percentage < 0.5 ? a : b; },
-            [percentage](double a, double b) { return (b - a) * percentage + a; },
-            [percentage](long a, long b) { static_cast<long>((b - a) * percentage + a); },
-            [percentage](bool a, bool b) { return percentage < 0.5 ? a : b; },
-            [percentage](auto a, auto b) {
-                throw std::logic_error("Start and End DataElement are of incompatible types.");
-            }
+            [percentage](std::string a, std::string b) -> DataElement { return percentage < 0.5 ? a : b; },
+            [percentage](double a, double b) -> DataElement { return (b - a) * percentage + a; },
+            [percentage](long a, long b) -> DataElement { return static_cast<long>((b - a) * percentage + a); },
+            [percentage](bool a, bool b) -> DataElement { return percentage < 0.5 ? a : b; },
+            [percentage](auto a, auto b) -> DataElement { throw std::logic_error("Start and End DataElement are of incompatible types."); }
         }, start.at(i), end.at(i)));
     }
 
