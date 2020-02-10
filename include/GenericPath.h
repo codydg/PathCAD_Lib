@@ -23,8 +23,9 @@ public:
     virtual PathElement getStateAtTime(double time) const = 0;
     virtual PathElement getStateAtPercentage(double percentage) const = 0;
     virtual double getTotalTime() const = 0;
-    std::string getName();
-    PathId getId();
+    std::string getName() const;
+    void setName(std::string name);
+    PathId getId() const;
 
 protected:
     std::string pathName;

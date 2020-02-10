@@ -14,12 +14,17 @@ GenericPath::GenericPath(PathId id) : id(id)
     pathName = defaultPathNames.at(id) + " " + std::to_string(++idCounters[id]);
 }
 
-std::string GenericPath::getName()
+std::string GenericPath::getName() const
 {
     return pathName;
 }
 
-PathId GenericPath::getId()
+void GenericPath::setName(std::string name)
+{
+    pathName = name;
+}
+
+PathId GenericPath::getId() const
 {
     return id;
 }
