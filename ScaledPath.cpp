@@ -1,6 +1,6 @@
 #include "ScaledPath.h"
 
-ScaledPath::ScaledPath(double totalTime) : totalTime(totalTime) {}
+ScaledPath::ScaledPath(PathId id, double totalTime) : GenericPath(id), totalTime(totalTime) {}
 
 GenericPath::PathElement ScaledPath::getStateAtTime(double time) const
 {

@@ -9,6 +9,7 @@ class PathGroup : public GenericPath
 {
 public:
     PathGroup();
+    virtual ~PathGroup() = default;
 
     virtual PathElement getStateAtTime(double time) const override;
     virtual PathElement getStateAtPercentage(double percentage) const override;

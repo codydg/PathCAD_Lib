@@ -5,7 +5,8 @@
 class ScaledPath : public GenericPath
 {
 public:
-    ScaledPath(double totalTime);
+    ScaledPath(PathId id, double totalTime);
+    virtual ~ScaledPath() = default;
 
     virtual PathElement getStateAtTime(double time) const override;
     virtual double getTotalTime() const override;

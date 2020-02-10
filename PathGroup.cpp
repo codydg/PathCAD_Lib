@@ -1,6 +1,6 @@
 #include "PathGroup.h"
 
-PathGroup::PathGroup() {}
+PathGroup::PathGroup() : GenericPath(PathId::PATH_GROUP) {}
 
 GenericPath::PathElement PathGroup::getStateAtTime(double time) const
 {
@@ -19,6 +19,15 @@ GenericPath::PathElement PathGroup::getStateAtTime(double time) const
 GenericPath::PathElement PathGroup::getStateAtPercentage(double percentage) const
 {
     return getStateAtTime(percentage * totalTime);
+}
+
+double PathGroup::getTotalTime() const
+{
+    double totalTime = 0.0;
+    for (const auto& path : paths)
+        totalTime += path->getTotalTime();
+
+    return totalTime;
 }
 
 void PathGroup::addPath(std::shared_ptr<GenericPath> newPath)

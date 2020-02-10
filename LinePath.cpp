@@ -5,7 +5,7 @@
 template<class... Ts> struct overload : Ts... { using Ts::operator()...; };
 template<class... Ts> overload(Ts...) -> overload<Ts...>;
 
-LinePath::LinePath(PathElement start, PathElement end, double totalTime) : ScaledPath(totalTime),
+LinePath::LinePath(PathElement start, PathElement end, double totalTime) : ScaledPath(PathId::LINE_PATH, totalTime),
         start(start), end(end) {}
 
 GenericPath::PathElement LinePath::getStateAtPercentage(double percentage) const

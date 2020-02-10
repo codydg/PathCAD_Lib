@@ -6,6 +6,7 @@ class LinePath : public ScaledPath
 {
 public:
     LinePath(PathElement start, PathElement end, double totalTime);
+    virtual ~LinePath() = default;
 
     virtual PathElement getStateAtPercentage(double percentage) const override;
 
