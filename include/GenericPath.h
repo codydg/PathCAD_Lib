@@ -3,6 +3,7 @@
 #include <vector>
 #include <variant>
 #include <string>
+#include <memory>
 #include <unordered_map>
 #include <mutex>
 
@@ -11,14 +12,14 @@ enum class PathId {
     LINE_PATH
 };
 
+using DataElement = std::variant<bool, long, double, std::string>;
+using PathElement = std::vector<std::shared_ptr<DataElement>>;
+
 class GenericPath
 {
 public:
     GenericPath(PathId id);
     virtual ~GenericPath() = default;
-
-    using DataElement = std::variant<bool, long, double, std::string>;
-    using PathElement = std::vector<DataElement>;
 
     virtual PathElement getStateAtTime(double time) const = 0;
     virtual PathElement getStateAtPercentage(double percentage) const = 0;

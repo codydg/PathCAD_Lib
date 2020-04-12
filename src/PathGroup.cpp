@@ -2,7 +2,7 @@
 
 PathGroup::PathGroup() : GenericPath(PathId::PATH_GROUP) {}
 
-GenericPath::PathElement PathGroup::getStateAtTime(double time) const
+PathElement PathGroup::getStateAtTime(double time) const
 {
     for (const auto& path : paths)
     {
@@ -16,7 +16,7 @@ GenericPath::PathElement PathGroup::getStateAtTime(double time) const
     return paths.back()->getStateAtPercentage(1.0);
 }
 
-GenericPath::PathElement PathGroup::getStateAtPercentage(double percentage) const
+PathElement PathGroup::getStateAtPercentage(double percentage) const
 {
     return getStateAtTime(percentage * totalTime);
 }

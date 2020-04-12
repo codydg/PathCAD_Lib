@@ -2,7 +2,7 @@
 
 ScaledPath::ScaledPath(PathId id, double totalTime) : GenericPath(id), totalTime(totalTime) {}
 
-GenericPath::PathElement ScaledPath::getStateAtTime(double time) const
+PathElement ScaledPath::getStateAtTime(double time) const
 {
     return getStateAtPercentage(time / getTotalTime());
 }

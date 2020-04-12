@@ -30,7 +30,8 @@ target_include_directories(${PROJECT_NAME}
 )
 
 install(TARGETS ${PROJECT_NAME}
-        LIBRARY DESTINATION lib
+    ARCHIVE DESTINATION lib
+    LIBRARY DESTINATION lib
 )
 
 install(FILES ${PUBLIC_HEADERS}
